@@ -1,7 +1,8 @@
 import App from './app';
-import database from './database'
+import connect from './database'
+import mongoose from 'mongoose';
 
 //Starting the Server
-database();
 const app = new App();
-app.start();
+mongoose.connect("mongodb://localhost:27017/nuevabd", {}).then(result =>
+    app.start()).catch(err => console.log(err))

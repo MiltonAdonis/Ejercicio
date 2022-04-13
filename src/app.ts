@@ -1,8 +1,8 @@
 import express from 'express';
 
 // Routes
-import indexRoutes from './routes';
-import tasksRoutes from './routes/products';
+import indexRoutes from './api/routers';
+import productsRoutes from './api/routers/products';
 
 class Application {
 
@@ -20,12 +20,12 @@ class Application {
     }
 
     middlewares() {
-
+        this.app.use(express.json());
     }
 
     routes() {
         this.app.use(indexRoutes);
-        this.app.use('/products', tasksRoutes);
+        this.app.use('/products', productsRoutes);
     }
 
     start() {

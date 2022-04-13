@@ -1,7 +1,7 @@
 
 import { response } from "express";
 import mongoose from "mongoose";
-import ProductModel from "../schema/products.schema";
+import ProductModel, { productSchema } from "../schema/products.schema";
 
 let errores: string[] = []
 
@@ -32,34 +32,36 @@ class ProductRepository {
     }
 
     //Edit
-    async editProducts(req: Request, res: Response) {
-        const producto = async (id) => {
-            const producto = await ProductModel.updateOne({ _id: id },
-                {
+    // async editProducts(req: Request, res: Response) {
+    //     const producto = async (id) => {
+    //         const producto = await ProductModel.updateOne({ _id: id },
+    //             {
 
-                })
-        }
-    }
+    //             })
+    //     }
+    // }
 
     //Editar
-    const actualizar = async (id) => {
-        const producto = await ProductoModel.updateOne({ _id: id },
-            {
-                $set: {
-                    nombre: 'Apple Watch Series 6 MODIFICADO',
-                    precio: 430000,
-                    marca: 'Apple MODIFCIADO'
-                }
-            })
-    }
+    // const actualizar = async (id) => {
+    //     const producto = await ProductoModel.updateOne({ _id: id },
+    //         {
+    //             $set: {
+    //                 nombre: 'Apple Watch Series 6 MODIFICADO',
+    //                 precio: 430000,
+    //                 marca: 'Apple MODIFCIADO'
+    //             }
+    //         })
+    // }
 
     //Eliminar
-    const eliminar = async (id) => {
-        const producto = await ProductoModel.deleteOne({ _id: id })
-        console.log(producto)
-    }
+    // const eliminar = async (id) => {
+    // const producto = await ProductoModel.deleteOne({ _id: id })
+    // console.log(producto)
+    // }
 
 
 
 
 }
+
+export default ProductRepository;
