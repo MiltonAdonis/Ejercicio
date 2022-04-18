@@ -4,5 +4,5 @@ import mongoose from 'mongoose';
 
 //Starting the Server
 const app = new App();
-mongoose.connect("mongodb://localhost:27017/nuevabd", {}).then(result =>
+mongoose.connect("mongodb://localhost:27017/productos", {}).then(result =>
     app.start()).catch(err => console.log(err))
