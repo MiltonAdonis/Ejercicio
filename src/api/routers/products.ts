@@ -7,37 +7,45 @@ const app = Router();
 
 //Get all
 app.get("/", async (req: Request, res: Response) => {
-    console.log("prueba");
-    console.log("prueba 2");
     res.send(await ProductModel.find());
 });
 
 //Create
 app.post("/", async (req: Request, res: Response) => {
-    const producto = new ProductModel({
+    const product = new ProductModel({
         nombre: req.body.nombre,
         precio: req.body.precio,
         marca: req.body.marca
     });
-    const val = await producto.save();
+    const val = await product.save();
     res.send('The product has been saved');
 });
 
-//Edit
-app.route('/edit/:nombre')
-    .get(async (req: Request, res: Response) => {
-        const { nombre } = req.body.nombre;
-        const product = await ProductModel.findById(nombre);
-        res.render('products/edit', { product });
-    })
+//Get by ID
+app.get("/:id", async (req: Request, res: Response) => {
+    const searchProduct = await ProductModel.findOne({
+        _id: req.params.id
+    });
+    res.send(searchProduct)
+})
 
+//Update
+app.put("/:id", (req: Request, res: Response) => {
+    let id = req.params.id
+    let update = req.body
+    ProductModel.findByIdAndUpdate(id, update, (err, ProductModel) => {
+        if (err) res.status(500).send({ message: 'Error: ${err}' })
+        res.status(200).send({ product: ProductModel })
+    })
+})
 
 //Delete
-app.route('/:_id')
-    .get(async (req: Request, res: Response) => {
-        const { _id } = req.body;
-        await ProductModel.findByIdAndDelete(_id);
-        res.send('Product has been deleted');
+app.delete("/:id", async (req: Request, res: Response) => {
+    const deleteProduct = await ProductModel.deleteOne({
+        _id: req.params.id
     });
+    res.send('The Product has been deleted');
+});
+
 
 export default app;
